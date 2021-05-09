@@ -13,7 +13,7 @@ from Mapas import ch_maps as cm
 from Obtencion_Datos import Obtiene_Datos as od
 import folium
 from streamlit_folium import folium_static
-import copy
+
 
 # st.set_page_config(layout='wide')
 @st.cache(allow_output_mutation=True)
@@ -76,10 +76,18 @@ if procesar:
     m = folium.Map(location=[lat.mean(), lon.mean()], zoom_start=8)
     datos = datos.astype({'Paso':'int16'})
     geo_comunas = ob_maps(reg)
+    
+    
+    style_function = lambda x: {'fillColor': '#ffffff', 
+                            'color':'#000000', 
+                            'fillOpacity': 0.1, 
+                            'weight': 0.1}
+    
     folium.Choropleth(
         geo_data = geo_comunas,
         name = 'choropleth',
         data = datos,
+        style_function = style_function,
         columns = ['cod_comuna', 'Paso'],
         key_on = 'properties.COD_COMUNA',
         fill_color = 'RdBu',
