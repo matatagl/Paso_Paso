@@ -11,3 +11,4 @@ argon2-cffi==20.1.0
 astor==0.8.1
 async-generator==1.10
 attrs==20.3.0
+lxml==4.6.3
