@@ -18,8 +18,8 @@ class Obtiene_Datos():
     """Obtiene los datos desde URL y los entrega como DataFrame"""
     def __init__(self):
         #Obtiene datos desde url
-        url ='https://e.infogram.com/81277d3a-5813-46f7-a270-79d1768a70b2?parent_url'
-        '=https%3A%2F%2Fwww.gob.cl%2Fcoronavirus%2Fpasoapaso%2F&src=embed#'
+        url ='https://e.infogram.com/81277d3a-5813-46f7-a270-79d1768a70b2?parent_url'\
+'=https%3A%2F%2Fwww.gob.cl%2Fpasoapaso%2F&src=embed#'
         self.url = url
         r = requests.get(url)
         dat_html = r.content
