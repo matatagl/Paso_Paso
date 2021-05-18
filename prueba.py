@@ -78,25 +78,27 @@ if procesar:
     geo_comunas = ob_maps(reg)
     
     
-    style_function = lambda x: {'fillColor': '#ffffff', 
-                            'color':'#000000', 
-                            'fillOpacity': 0.1, 
-                            'weight': 0.1}
-    
     folium.Choropleth(
         geo_data = geo_comunas,
         name = 'choropleth',
         data = datos,
-        style_function = style_function,
         columns = ['cod_comuna', 'Paso'],
         key_on = 'properties.COD_COMUNA',
+        # bins = 3,
         fill_color = 'RdBu',
         fill_opacy = 0.2,
         line_opacy = 0.2,
         legend_name = 'Estado',
         nan_fill_color = 'purple',       
         ).add_to(m)
+    folium.TileLayer('cartodbpositron').add_to(m)
+    # folium.LayerControl().add_to(m)
+    # folium.features.GeoJson(geo_comunas, name='Comuna', popup=(
+    #     folium.features.GeoJsonPopup(field=['properties.COD_COMUNA'])))
     folium_static(m)
-    st.dataframe(datos)
+    stdatos = datos[['COMUNA', 'Paso', 'ESTADO', 'Región']]
+    stdatos.rename(columns={'COMUNA': 'Comuna', 'ESTADO':'Estado'},
+                   inplace=True)
+    st.dataframe(stdatos)
 else:
     st.stop()
